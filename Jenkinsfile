@@ -4,7 +4,10 @@ pipeline {
     parameters {
          string(name: 'tomcat_dev', defaultValue: 'localhost', description: 'Staging Server')
          string(name: 'tomcat_prod', defaultValue: 'localhost', description: 'Production Server')
-    }
+
+        string(name: 'tomcat_base_path', defaultValue: '/home/mm/dev/CICD/jenkins/tomcat-', description: 'Staging Server')
+        string(name: 'jenkins_base_path_to_war', defaultValue: '/var/lib/jenkins/workspace/FullyAutomated/webapp/target/*.war', description: 'Production Server')  
+
 
     triggers {
          pollSCM('* * * * *')
@@ -27,14 +30,14 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "cp /var/lib/jenkins/workspace/FullyAutomated/webapp/target/*.war /home/mm/dev/CICD/jenkins/tomcat-staging/webapps"
+                        sh "cp ${params.jenkins_base_path_to_war} ${tomcat_base_path}-staging/webapps"
                     }
                 }
                 
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "cp /var/lib/jenkins/workspace/FullyAutomated/webapp/target/*.war /home/mm/dev/CICD/jenkins/tomcat-staging/webapps"
+                        sh "cp ${params.jenkins_base_path_to_war} ${tomcat_base_path}-prod/webapps"
                     }
                 }
             }
