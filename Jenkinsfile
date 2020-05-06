@@ -7,8 +7,8 @@ pipeline {
 
         string(name: 'tomcat_base_path', defaultValue: '/home/mm/dev/CICD/jenkins/tomcat-', description: 'Staging Server')
         string(name: 'jenkins_base_path_to_war', defaultValue: '/var/lib/jenkins/workspace/FullyAutomated/webapp/target/*.war', description: 'Production Server')  
-
-
+    }
+    
     triggers {
          pollSCM('* * * * *')
      }
