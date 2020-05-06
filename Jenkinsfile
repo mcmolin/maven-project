@@ -30,14 +30,14 @@ pipeline {
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "cp ${params.jenkins_base_path_to_war} ${params.tomcat_base_path}-staging/webapps"
+                        sh "cp ${params.jenkins_base_path_to_war} ${params.tomcat_base_path}staging/webapps"
                     }
                 }
                 
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "cp ${params.jenkins_base_path_to_war} ${params.tomcat_base_path}-prod/webapps"
+                        sh "cp ${params.jenkins_base_path_to_war} ${params.tomcat_base_path}prod/webapps"
                     }
                 }
             }
